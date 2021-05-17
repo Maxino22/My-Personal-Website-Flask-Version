@@ -9,7 +9,7 @@ from flask_discussion import Discussion
  
 app = Flask(__name__)
 
-Env = 'dev'
+Env = 'prod'
 
 photos = UploadSet('photos', IMAGES)
 

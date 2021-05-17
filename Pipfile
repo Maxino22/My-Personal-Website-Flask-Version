@@ -40,6 +40,7 @@ flask-discussion = "*"
 flask-ckeditor = "*"
 python-slugify = "*"
 mysqlclient = "*"
+gunicorn = "*"
 
 [dev-packages]
 
