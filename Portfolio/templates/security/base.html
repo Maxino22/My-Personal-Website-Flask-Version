@@ -1,0 +1,71 @@
+{% block doc -%}
+<!DOCTYPE html>
+<html {% block html_attribs %}{% endblock html_attribs %}>
+  {%- block html %}
+  <head>
+    {%- block head %}
+    <title>{% block title %}{{ title|default }}{% endblock title %}</title>
+
+      {%- block metas %}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {%- endblock metas %}
+
+      {%- block styles %}
+      <link rel="preconnect" href="https://fonts.gstatic.com"> 
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"> 
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"> 
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">   
+      {%- endblock styles %}
+    {%- endblock head %}
+  </head>
+ 
+  <body {% block body_attribs %}{% endblock body_attribs %}>
+   
+    {% block body -%}
+      {% block navbar %}
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+        <div class="container">
+          <a href="{{url_for('main.index')}}" class="navbar-brand">Maxino</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+          </div>
+        </div>
+      </nav>
+      <header id="main-header" class="py-2 bg-primary text-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <h1><i class="fa fa-user"></i>  Max Admin</h1>
+            </div>
+          </div>
+        </div>
+      </header>
+    
+      {%- endblock navbar %}
+      <div class="d-flex justify-content-center"> {% include 'security/_messages.html' %}</div>
+      {% block content -%}
+      {%- endblock content %}
+      <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
+        <div class="conatiner">
+          <div class="row">
+            <div class="col">
+              <p class="lead text-center">Copyright &copy; 2021 Maxino</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      {% block scripts %} 
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script> 
+  <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script> 
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> 
+  <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+      {%- endblock scripts %}
+    {%- endblock body %}
+  </body>
+
+  {%- endblock html %}
+</html>
+{% endblock doc -%}

@@ -1,0 +1,81 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+  
+
+  <header id="main-header" class="py-2 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1> Post One</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIONS -->
+  <section id="action" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mr-auto">
+          <a href="{{url_for('author.admin')}}" class="btn btn-light btn-block">
+            <i class="fa fa-arrow-left"></i> Back To Dashboard
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="#" class="btn btn-success btn-block">
+            <i class="fa fa-check"></i> Save Changes
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="#" class="btn btn-danger btn-block">
+            <i class="fa fa-remove"></i> Delete Post
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTS -->
+  <section id="posts">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <h4>Respond to message</h4>
+            </div>
+            <div class="card-body">
+           <h3>Message from {{message.name}} </h3>
+           <hr>
+           <blockquote>
+             {{message.message}}
+           </blockquote>
+           <br>
+           <a class="btn btn-primary mb-2" data-toggle="collapse" href="#col" role="button" aria-expanded="false" aria-controls="col">
+            Reply Message
+          </a>
+          <div class="collapse" id='col'> 
+           <form method="POST" action="{{url_for('author.message',message_id=message.id )}}" >
+            {{form.csrf_token}}
+            <div class="form-group">
+              <label>Email</label>
+              {{form.email(class="form-control w-25", value=message.email)}}
+            </div>
+            <div class="form-group">
+              <label> Email Head</label>
+              {{form.head(class="form-control")}}
+            </div>
+            <div class="form-group">
+              <label> Body</label>
+              {{form.body(class="form-control", cols="20",rows="10")}}
+            </div>
+          <button class="btn btn-primary" type="submit">Send</button>
+          </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock  %}

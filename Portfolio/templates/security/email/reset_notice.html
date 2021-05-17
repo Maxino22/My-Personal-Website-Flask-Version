@@ -1,0 +1,8 @@
+{% extends 'security/email/base.html' %}
+{% block content %}
+  
+<p>{{ _('Hello %(name)s!', name=user.first_name) }}</p>
+
+
+<p>{{ _('Your password has been reset') }}</p>
+{% endblock  %}

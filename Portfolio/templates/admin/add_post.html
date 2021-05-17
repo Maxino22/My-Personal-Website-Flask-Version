@@ -1,0 +1,98 @@
+ {% extends 'admin/base.html' %}
+
+{% block title %}
+
+Add Post
+{% endblock  %}
+ {% block content %}
+ <div class="container">
+   <div class="row">
+     <div class="col-lg-10 mt-4">
+
+              <form method="POST" enctype ="multipart/form-data">
+                {{form.csrf_token}}
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  {{form.title(class="form-control")}}
+                </div>
+                <a class="btn btn-secondary btn-sm mb-2" data-toggle="collapse" href="#col" role="button" aria-expanded="false" aria-controls="col">
+                  SEO
+                </a>
+               <div class="collapse" id='col'>  
+                 <div class="card card-body">        
+                <div class="form-group">
+                  <label for="descriptiomn">Description</label>
+                  {{form.description(class="form-control")}}
+                  <small class="text-danger">A short description of content 50-60 words max</small>
+                </div>
+                <div class="form-group">
+                  <label for="descriptiomn">Keywords</label>
+                  {{form.keywords(class="form-control")}}
+                  <small class="text-muted">Four keywords Max</small>
+                </div>
+                <div class="form-group">
+                  <label for="body">Image Alt-Tags(Image SEO)</label>
+                  {{form.img_alt(class="form-control")}}
+                </div>
+              </div>  
+              </div>
+
+                <div class="form-group">
+                  <label for="category">Category</label>
+                  <select name="category_id" class="form-control">
+                    {% for category in categories %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="file">Image Upload</label>
+                  {{form.picture(class="form-control-file")}}
+                  <small class="form-text text-muted">Max Size 3mb</small>
+                </div>
+                <div class="form-group">
+                  <label for="body">Body</label>
+                  {{form.text(class="form-control")}}
+                </div>
+                  {{form.submit(class="btn btn-primary")}}
+                </form>
+                {{ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js'))}}
+                {{ckeditor.config(name="text")}}
+              </div> 
+
+              <div class="col-lg-2 mt-3 ">  
+                <button class="btn btn-primary ml-2 d-inline mb-4 "  title="Images uploading doesn't work use this to generate link"  data-toggle="modal" data-target="#me">Post Image Link</button>
+                <p class=" card-body">{{save | safe}}</p> 
+              </div>
+            
+               
+     </div>
+   </div>
+
+               <!-- Modal -->
+               <div class="modal fade" id="me" tabindex="-1" role="dialog" aria-labelledby="my" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="my">Delete </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    Upload image to server Keep it small please 
+                    </div>
+                    <div class="modal-footer">
+                      <form class="form-inline" action="/admin/add" method="POST" enctype="multipart/form-data">
+                        {{form.csrf_token}}
+                        <input class="form-control-file m-3" type="file" name="thefile" />
+                        <input class="btn btn-success" type="submit" />
+                      </form> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+                      
+ 
+   
+ {% endblock  %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title%}
+  Blog
+{% endblock  %}
+
+{% block content %}
+    <!-- Blogs-->
+    <div id="resume">
+      <div class="card card-body bg-success text-white py-5">
+        <h2>My Blog</h2>
+        <p>I like to write about Tec, Business and Marketing guest posts</p>
+     
+      </div>
+   
+<div class="blog-posts">
+  {% for blog in blogs.items %}
+    <div class="post-card">
+      <div class="post-image">
+        <img src="{{resized_img_src(blog.picture, width=600, height=335, mode='fit', quality=95)}}" alt="{{blog.img_alt}}">
+      </div>
+      <div class="post-content">
+        <h4 class="card-title"><a title="{{blog.title}}" href="{{url_for('main.post', slug=blog.slug)}}" class="text-dark">{{blog.title}}</a></h4>
+        <small class="text-muted"> Written By {{blog.user.first_name}} {{blog.user.last_name}} on {{blog.date.strftime("%B %d, %Y ")}}</small>
+        <hr>
+        <p class="card-text">{{blog.description}}<a href="{{url_for('main.post', slug=blog.slug)}}">Read More</a> </p>
+        <div class="post-footer text-muted">
+          <p><i class="fa fa-folder"></i>  {{blog.category.name}}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div> 
+
+    <nav class="ml-4 page">
+      <ul class="pagination justify-content-center">
+        {% for page_num in blogs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if blogs.page ==page_num %}
+                <li class="page-item disabled"><a href="{{url_for('main.blog', page=page_num)}}" class="page-link">{{page_num}}</a></li>  
+                {% else %}
+                <li class="page-item"><a href="{{url_for('main.blog', page=page_num)}}" class="page-link">{{page_num}}</a></li>     
+                {% endif %}
+            {% else %}
+              ...
+            {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  
+    </div>
+
+{% endblock  %}

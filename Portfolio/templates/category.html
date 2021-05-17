@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+    
+    <title>{{category.name}}</title>
+   
+    <!-- Meta robots -->
+    <meta name="robots" content="all max-image-preview:standard,max-snippet:20 ">
+
+  </head>
+
+  <body class="bg-light">
+    <!-- nav bar -->
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-3">
+        <div class="container">
+         <a href="{{url_for('main.index')}}" class="navbar-brand">Maxino</a>
+         <button class="navbar-toggler" data-toggle="collapse" data-target="#nav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ml-auto">
+              {% for cat in cats %}
+              <li class="nav-item"><a href="{{url_for('main.category', slug=cat.slug)}}" class="nav-link">{{cat.name}}</a></li>
+              {% endfor %}
+            <li class="nav-item">
+              <a href="{{url_for('main.contact')}}" class="nav-link">Contact</a>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </nav>
+
+      <!-- section -->
+     
+<div class="container">
+  <div class="category-main-grid">
+    <div>
+      <div class="category-title">
+        <h1>{{category.name}}</h1>
+      </div>
+      
+      <div class="category-posts">
+        {% for blog in blogs.items %}
+          {% if blog.category_id == category.id %}
+            <div class="post-card">
+              <div class="post-image">
+                <img src="{{ blog.picture }}" alt="{{blog.img_alt}}">
+              </div>
+              <div class="post-content">
+                <h4 class="card-title"><a title="{{blog.title}}" href="{{url_for('main.post', slug=blog.slug)}}" class="text-dark">{{blog.title}}</a></h4>
+                <small class="text-muted"> Written By {{blog.user.first_name}} {{blog.user.last_name}} on {{blog.date.strftime("%B %d, %Y ")}}</small>
+                <hr>
+                <p class="card-text">{{blog.description}}<a href="{{url_for('main.post', slug=blog.slug)}}">Read More</a> </p>
+                <div class="post-footer text-muted">
+                  <p><i class="fa fa-folder"></i>  {{category.name}}</p>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <nav class="ml-4 mt-4 page">
+        <ul class="pagination justify-content-center">
+          {% for page_num in blogs.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+              {% if page_num %}
+                  {% if blogs.page ==page_num %}
+                  <li class="page-item disabled"><a href="{{url_for('main.category',slug=category.slug, page=page_num)}}" class="page-link">{{page_num}}</a></li>  
+                  {% else %}
+                  <li class="page-item"><a href="{{url_for('main.category', slug=category.slug, page=page_num)}}" class="page-link">{{page_num}}</a></li>     
+                  {% endif %}
+              {% else %}
+                ...
+              {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    <!-- Sidebar -->
+    <div>
+      <div class="card pad mb-5"></div>
+      <div class="card border-light">
+        <p class="card-title lead">Popular Posts</p>
+        {% for post in posts %}
+        <div class="card-body d-flex">
+          <img class="cory rounded" src="{{resized_img_src(post.picture, width=960, height=960, mode='crop', quality=95)}}" alt="PPs" />
+          <div class="d-flex flex-column justify-content-between">
+            <p>
+              <a class="card-text text-dark" href="{{url_for('main.post', slug=post.slug)}}"
+              >{{post.title}}</a
+              >
+            </p>
+            <small class="text-muted">{{ post.date.strftime('%Y-%m-%d') }}</small>
+          </div>
+        </div>    
+        {% endfor %}
+      </div>
+      <div class="card pad mt-5"></div>
+    </div>
+  </div>
+    
+  </div>
+
+
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "security/base.html" %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+
+{% block title %}
+  Login
+{% endblock title %}
+
+
+{% block content %}
+
+
+
+<!-- LOGIN -->
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto mt-3">
+        <div class="card">
+          <div class="card-header">
+            <h4>Account Login</h4>
+          </div>
+          <div class="card-body">
+<form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+  {{ login_user_form.hidden_tag() }}
+  <div class="form-group">
+         
+    {{ render_field_with_errors(login_user_form.email, class='form-control') }}
+  </div>
+  <div class="form-group">
+                 
+    {{ render_field_with_errors(login_user_form.password, class='form-control') }}
+  </div>
+  {{ render_field_with_errors(login_user_form.remember) }}
+
+  {{ render_field(login_user_form.submit,class="btn btn-primary btn-block" ) }}
+</form>
+<small >or <a class="text-primary" style="text-decoration: none;" href="/reset"> Forgot Password ?</a></small>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+{% endblock %}

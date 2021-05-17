@@ -1,0 +1,59 @@
+{% extends "security/base.html" %}
+{% block title %}Register{% endblock title %}
+{% block content %}
+<!-- ACTIONS -->
+<section id="action" class="py-4 mb-4 bg-light">
+  <div class="container">
+    <div class="row">
+      
+    </div>
+  </div>
+</section>
+
+<!-- LOGIN -->
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <h4>Account Register</h4>
+          </div>
+          {% from "security/_macros.html" import render_field_with_errors, render_field %}
+            <div class="card-body">
+              <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+                {{ register_user_form.hidden_tag() }}
+                  
+                    <div class="form-group">
+                      {{render_field_with_errors(register_user_form.first_name,class='form-control', placeholder='First Name')}}
+                    </div>
+                    <div class="form-group">
+                      {{render_field_with_errors(register_user_form.last_name,class='form-control', placeholder='Last Name')}}
+                    </div>
+                
+                <div class="form-group">
+                 
+                  {{ render_field_with_errors(register_user_form.email, class='form-control') }}
+                </div>
+                <div class="form-group">
+                  
+                   {{ render_field_with_errors(register_user_form.password, class='form-control') }}
+                </div>
+               
+                {% if register_user_form.password_confirm %}
+                <div class="form-group">
+                  {{ render_field_with_errors(register_user_form.password_confirm, class='form-control') }}
+                </div>
+           
+                {% endif %}
+                {{ render_field(register_user_form.submit, class="btn btn-primary btn-block" ) }}
+              </form>
+              <small>Have an account login insted? <a href="{{url_for('security.login')}}">click</a> </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

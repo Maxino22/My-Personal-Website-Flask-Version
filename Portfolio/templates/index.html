@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block metas %}
+      <!-- META TAGS -->
+      <meta name="description" content="{{user.bio}}">
+      <meta name="keywords" content="{{user.bio}}">
+      
+      <!-- Open Graph -->
+      <meta name="twitter:card" content="summary" />
+      <meta property="og:title" content="{{user.first_name}} {{user.last_name}}" >
+      <meta property="og:image" content="{{user.profile_pic}}" >
+      <meta property="og:description" content="{{user.bio}}" >
+      <meta property="og:type" content="article" >
+      <meta property="og:url" content="{{url_for('main.index')}}" >
+      <meta property="og:image:width" content="400" />
+      <meta property="og:image:height" content="300" />
+      <meta property="og:image:alt" content="Maxwell Muhanda" />
+  
+      <!-- Meta robots -->
+      <meta name="robots" content="all max-image-preview:standard,max-snippet:20 ">
+
+{% endblock  %}
+{% block title %}
+  Maxwell Muhanda
+{% endblock  %}
+{% block header %}
+ <header id="main-header">
+  <div class="row no-gutters">
+    
+    <div class="col-lg-4 col-md-5">
+      <img src="{{url_for('static', filename='profile_pics/' + user.profile_pic) }}">
+    </div>
+    <div class="col-lg-8 col-md-7">
+          <div class="d-flex flex-column">
+            <div class="p-5 bg-dark text-white">
+              <div class="name d-flex flex-row justify-content-between align-items-center">
+                <h1 class="display-6">Maxwell Muhanda</h1>
+                <div><a class="nav-link text-white" target="_blank" href="https://twitter.com/MaxwellMuhanda"><i class="fa fa-twitter fa-2x  mx-2"></i></a></div>
+                <div><a class="nav-link text-white" target="_blank" href="https://github.com/Maxino22"><i class="fa fa-github fa-2x  mx-2"></i></a></div>
+                <div><a class="nav-link text-white" target="_blank" href="https://www.linkedin.com/in/maxwell-muhanda-5563b3"><i class="fa fa-linkedin fa-2x mx-2"></i></a></div>
+              </div>
+            </div>
+            
+            <div class="p-4 bg-black text-center">
+               Freelance Programmer/Marketing
+            </div>
+            
+            <div>
+              <div class="d-flex flex-row text-white align-items-stretch text-center">
+                
+                <a href="{{url_for('main.index')}}" class="port-item p-3 bg-primary link">
+                  <i class="fa fa-home d-block"></i> Home
+                </a>
+                <a href="{{url_for('main.blog')}}" class="port-item p-3 bg-success link">
+                  <i class="fa fa-book d-block"></i> Blog
+                </a>
+                <a href="{{url_for('main.work')}}" class="port-item p-3 bg-warning link" >
+                  <i class="fa fa-folder-open d-block"></i> Work
+                </a>
+                <a href="{{url_for('main.contact')}}" class="port-item p-3 bg-danger link">
+                  <i class="fa fa-envelope d-block"></i> Contact
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+ {% endblock  %}
+
+{% block content %}
+  
+<div class="d-flex justify-content-center"> {% include 'security/_messages.html' %}</div>  
+
+<!-- HOME -->
+<div id="home">
+  <div class="card card-body bg-primary text-white py-5">
+    <h2>Hello</h2>
+    <p class="lead">My name is Maxwell Muhanda and i like to like to design, develop and deploy websites</p>
+    <p class="lead">I specially enjoy working with small businesses and individual clients, helping them launch and maintain their digital infrastructure.</p>
+    <p>Contact me and tell me what you need</p>
+    <b>
+      <a href="mailto:{{user.email}}">info@maxmuhanda.com</a>
+    </b>
+  </div>
+  
+  <div class="card card-body py-5">
+    <h3>My Skills</h3>
+    <p>The following are skills i offer </p>
+    <hr>
+    <h4>HTML/CSS</h4>
+    <div class="progress mb-3">
+      <div class="progress-bar bg-success" style="width:100%"></div>
+    </div>
+    <h4>Python</h4>
+    <div class="progress mb-3">
+      <div class="progress-bar bg-success" style="width:100%"></div>
+    </div>
+    <h4>Database Design</h4>
+    <div class="progress mb-3">
+      <div class="progress-bar bg-success" style="width:100%"></div>
+    </div>
+    <h4>Data Analysis</h4>
+    <div class="progress mb-3">
+      <div class="progress-bar bg-success" style="width:80%"></div>
+    </div>
+    <h4>Digital Marketing</h4>
+    <div class="progress mb-3">
+      <div class="progress-bar bg-success" style="width:70%"></div>
+        </div>
+      </div>
+    </div>
+    
+    {% endblock %}
+    
+{% block footer %}
+<footer id="main-footer" class="p-5 bg-dark text-white">
+  <div class="row">
+<div class="col-md-6">
+  <a href="{{ url_for('main.download') }}" class="btn btn-outline-light"><i class="fa fa-cloud"></i> Download My Resume</a> 
+</div>
+ </div>
+    </footer>  
+{% endblock footer %}

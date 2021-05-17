@@ -1,0 +1,105 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+  
+  <header id="main-header" class="py-2 bg-warning text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1><i class="fa fa-users"></i> Users</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIONS -->
+  <section id="action" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+              <button class="btn btn-warning">Search</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USERS -->
+  <section id="posts">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <h4>Latest Users</h4>
+            </div>
+            <table class="table table-striped">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>User Id</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Confirmed Email AT</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users.items %}
+                <tr>
+                  <td scope="row">{{user.id}}</td>
+                  <td>{{user.first_name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.confirmed_at}}</td>
+                  {% if current_user.id ==1 %}
+                  <td><button class="btn-link btn-outline-danger text-danger ml-2" data-toggle="modal" data-target="#my">
+                    <i class="fa fa-trash fa-2x "></i>
+                    </button></td>
+                    
+                  {% endif %}
+                </tr>
+                   <!-- Modal -->
+    <div class="modal fade" id="my" tabindex="-1" role="dialog" aria-labelledby="my" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="my">Delete </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          Delete this User
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="{{url_for('author.delete_user', user_id=user.id)}}" method="POST">
+              <input type="submit" class="btn btn-danger" value="Delete" >
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+                    {% endfor %}          
+              </tbody>
+            </table>
+
+            <nav class="ml-4">
+              <ul class="pagination">
+                <li class="page-item disabled"><a href="#" class="page-link">Previous</a></li>
+                <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">Next</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  {% endblock  %}

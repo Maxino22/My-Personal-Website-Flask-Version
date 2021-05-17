@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+  Portfolio
+{% endblock  %}
+
+{% block content %}
+  <!-- WORK -->
+  <div id="work">
+    <div class="card card-body bg-warning py-5">
+      <h3>My Portfolio</h3>
+      <p>Take a Look at Some of my work</p>
+    </div>
+
+    <div class="card card-body py-5">
+      <h3>What have I built?</h3>
+      <p>Here are some of my work in web development</p>
+      <div class="row mt-3">
+        {% for port in portfolio %}
+        <div class="work">
+          <div class="work-image">
+            <img src="{{url_for('static', filename='port_pics/' + port.pic, mode='crop') }}" >
+          </div>
+          <div class="work-main">
+            <p class="work-title">{{port.title}}</p> <small>{{port.small}}</small>
+            <p class="work-content">{{port.description}}</p>
+            <a style="text-decoration: none;" href="{{port.link}}" target="_blank" class="work-link"> link to website</a>
+          </div>
+        </div>
+         {% endfor %}
+     
+      </div>
+    </div>
+  </div>
+
+{% endblock  %}
