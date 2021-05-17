@@ -5,6 +5,7 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES
 import os
 from flask_images import Images
 from flask_discussion import Discussion
+from datetime import timedelta
 
  
 app = Flask(__name__)
@@ -24,6 +25,7 @@ if Env == 'dev':
     app.config.from_pyfile('config.cfg')
 else:
     app.config.from_pyfile('prodconfig.cfg')
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 configure_uploads(app, photos)
 
