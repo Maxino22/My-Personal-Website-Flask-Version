@@ -1,16 +1,17 @@
 from flask import render_template, send_file, Blueprint, redirect, url_for, flash, request, send_from_directory, abort, current_app, session
-from Portfolio import db, photos, app
-from Portfolio.models import User, Blog, Category, Contact, mail, Portfolio
+from Portfolio import db, photos, app, mail
+from Portfolio.models import User, Blog, Category, Contact, Portfolio
 from flask_security import login_required, logout_user, current_user
 from Portfolio.admin.forms import ArticleForm, CategoryForm, UpdateForm, Reply, PortfolioForm
 from Portfolio.picture_handler import add_profile_pic, add_port_pic
-from flask_mail import  Message
+from flask_mail import Message
 import os
 import uuid
 
 save = 1
 
 author = Blueprint('author', __name__)
+
 
 @author.route('/admin/', methods=['POST', 'GET'])
 @login_required
@@ -25,14 +26,14 @@ def admin():
     if form.validate_on_submit():
         first_name = str(uuid.uuid4())
         pic = add_port_pic(form.pic.data, first_name)
-        
-        new_port = Portfolio(title=form.title.data, small= form.small.data, pic=pic, description=form.description.data, link=form.link.data )
+
+        new_port = Portfolio(title=form.title.data, small=form.small.data,
+                             pic=pic, description=form.description.data, link=form.link.data)
         print(form.title.data)
         db.session.add(new_port)
         db.session.commit()
         flash("Portfolio Added", 'success')
         return redirect(url_for('author.admin'))
-        
 
     return render_template('admin/index.html', admin=True, form=form, users=users, categories=categories, blogs=blogs, messages=messages)
 
@@ -53,12 +54,12 @@ def add_post():
         image_url = photos.url(photos.save(form.picture.data))
 
         new_blog = Blog(title=form.title.data,
-                        description=form.description.data, 
-                        keywords=form.keywords.data, 
+                        description=form.description.data,
+                        keywords=form.keywords.data,
                         img_alt=form.img_alt.data,
                         category_id=int(request.form['category_id']),
                         picture=image_url,
-                        user_id=current_user.id, 
+                        user_id=current_user.id,
                         text=form.text.data)
         db.session.add(new_blog)
         db.session.commit()
@@ -68,6 +69,8 @@ def add_post():
     return render_template('admin/add_post.html', form=form, categories=categories, save=save)
 
 # UPDATE BLOG
+
+
 @author.route('/admin/<int:blog_id>/update', methods=['GET', 'POST'])
 @login_required
 def update_post(blog_id):
@@ -147,7 +150,7 @@ def settings():
     return render_template('admin/settings.html', admin=True)
 
 
-# 
+#
 @author.route('/admin/users')
 @login_required
 def users():
@@ -202,7 +205,9 @@ def profile(current_user_id):
 def details():
     return render_template('admin/details.html', admin=True)
 
-# message 
+# message
+
+
 @author.route('/admin/<int:message_id>/massage', methods=['POST', 'GET'])
 @login_required
 def message(message_id):
@@ -218,9 +223,8 @@ def message(message_id):
     return render_template('admin/message.html', admin=True, message=message, form=form)
 
 
-
 # Delete Message
-@author.route('/admin/<int:message_id>/delete_msg', methods=[ 'POST'])
+@author.route('/admin/<int:message_id>/delete_msg', methods=['POST'])
 @login_required
 def delete_msg(message_id):
     message = Contact.query.filter_by(id=message_id).first()

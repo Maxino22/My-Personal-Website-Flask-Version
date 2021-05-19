@@ -1,7 +1,6 @@
 from Portfolio import db, app
 from datetime import datetime
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
-from flask_mail import Mail
 from datetime import datetime
 from Portfolio.admin.forms import ExtendedRegisterForm
 from sqlalchemy import event
@@ -49,7 +48,7 @@ class Blog(db.Model):
     title = db.Column(db.Text(), nullable=False)
     slug = db.Column(db.String(180), nullable=False)
     picture = db.Column(db.String(100))
-    description  = db.Column(db.String(200))
+    description = db.Column(db.String(200))
     keywords = db.Column(db.String(100))
     img_alt = db.Column(db.String(100))
 
@@ -59,7 +58,8 @@ class Blog(db.Model):
     @staticmethod
     def generate_slug(target, value, oldvalue, initiator):
         if value and (not target.slug or value != oldvalue):
-            target.slug =slugify(value)
+            target.slug = slugify(value)
+
 
 db.event.listen(Blog.title, 'set', Blog.generate_slug, retval=False)
 
@@ -78,9 +78,11 @@ class Category(db.Model):
     @staticmethod
     def generate_slug(target, value, oldvalue, initiator):
         if value and (not target.slug or value != oldvalue):
-            target.slug =slugify(value)
+            target.slug = slugify(value)
+
 
 db.event.listen(Category.name, 'set', Category.generate_slug, retval=False)
+
 
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -100,13 +102,7 @@ class Portfolio(db.Model):
     link = db.Column(db.String(150))
 
 
-
 # flask security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore,
                     confirm_register_form=ExtendedRegisterForm)
-
-# flask-mail
-app.config.from_pyfile('mail_config.cfg')
-mail = Mail(app)
-

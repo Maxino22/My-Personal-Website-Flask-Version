@@ -41,6 +41,7 @@ flask-ckeditor = "*"
 python-slugify = "*"
 mysqlclient = "*"
 gunicorn = "*"
+autopep8 = "*"
 
 [dev-packages]
 
