@@ -60,6 +60,7 @@ class ConfigRemote:
     SECURITY_CHANGEABLE = True
     SECURITY_POST_LOGIN_VIEW = ('author.admin')
     SECURITY_POST_LOGOUT_VIEW = ('security.login')
+    EMAIL_SUBJECT_REGISTER = 'Verify Your Email To Access'
     SECURITY_POST_REGISTER_VIEW = '/login'
     SECURITY_POST_CONFIRM_VIEW = '/login'
     SECURITY_EMAIL_PLAINTEXT = False

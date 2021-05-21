@@ -11,8 +11,7 @@ from Portfolio.config import Config, ConfigRemote
 
 app = Flask(__name__)
 
-Env = 'dev'
-
+Env = 'prod'
 photos = UploadSet('photos', IMAGES)
 
 
@@ -23,7 +22,6 @@ else:
 
 
 configure_uploads(app, photos)
-
 
 db = SQLAlchemy(app)
 Migrate(app, db)
