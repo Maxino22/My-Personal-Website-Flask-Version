@@ -48,7 +48,8 @@ class Config:
 
 class ConfigRemote:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'mysql://sql4413041:RVFWWnezJg@sql4.freemysqlhosting.net/sql4413041'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////' + \
+        os.path.join(BASE_DIR, 'db.sqlite')
     SECRET_KEY = 'mintjtnrtjnbjt'
     SECURITY_REGISTERABLE = True
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
@@ -66,15 +67,15 @@ class ConfigRemote:
     SECURITY_EMAIL_PLAINTEXT = False
     SECURITY_EMAIL_HTML = True
     SECURITY_FLASH_MESSAGES = True
-    DISCUSSION_DISQUS_SHORTNAME = 'maxmuhanda'
     SECURITY_MSG_EMAIL_ALREADY_ASSOCIATED = (
         'This Email is Registered to another account', 'error')
     SECURITY_MSG_USER_DOES_NOT_EXIST = ('This User Does not Exist!', 'error')
     SECURITY_DEFAULT_REMEMBER_ME = True
     UPLOADED_PHOTOS_DEST = STATIC_ROOT
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=2)
+    PERMANENT_SESSION_LIFETIME = timedelta(
+        minutes=10)
 
-    DEBUG = False
+    DEBUG = True
 
     # flask ckeditor
     CKEDITOR_HEIGHT = 500

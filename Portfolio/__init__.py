@@ -5,7 +5,6 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES
 import os
 from flask_mail import Mail
 from flask_images import Images
-from flask_discussion import Discussion
 from Portfolio.config import Config, ConfigRemote
 
 
@@ -26,7 +25,6 @@ configure_uploads(app, photos)
 db = SQLAlchemy(app)
 Migrate(app, db)
 images = Images(app)
-discussion = Discussion(app)
 mail = Mail(app)
 
 # db error

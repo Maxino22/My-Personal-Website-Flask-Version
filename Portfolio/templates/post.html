@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% import "flask_discussion/disqus.html" as disqus %}
 <html lang="en" prefix="og: http://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
@@ -99,20 +98,45 @@
             <div class="card-body d-flex flex-row card border-light about">
         <img class="rounded-circle" style="width: 5rem;" src="{{url_for('static', filename='profile_pics/' + post.user.profile_pic) }}" alt="User Image" />
               <div class="blog-footer-content">
-               {% if post.user.id ==1 %}
-              <a class="text-dark" href="{{url_for('main.index')}}"><h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3></a>  
+                <a class="text-dark" target="_blank" href="{{post.user.url_to}}">
+                {% if post.user.id ==1 %}
+              <h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3>
+              {%else %}
+              <h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3>
               {% endif %} 
-  
-              <a href="{{post.user.url_to}}"><h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3></a>  
+            </a>  
+           
                 <p>
                   {{post.user.bio}}
                 </p>            
           </div>
         </div>
-  
-        <div class="card-body d-flex flex-row card border-light disqus">
-          {{ disqus.render_comments(identifier="{{post.id}}", url="{{url_for('main.post', slug=post.slug)}}", title="{{post.title}}") }}
-        </div>
+        <div id="disqus_thread"></div>
+        <script>
+          var post_id = '{{post.id}}';
+          var post_link = "{{url_for('main.post', slug=post.slug)}}";
+        </script>
+
+          <script>
+              /**
+              *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+              *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+              
+              var disqus_config = function () {
+              this.page.url = post_id;  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = post_link; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+              };
+              
+              (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://maxmuhanda.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            
+   
 
  
       </div>

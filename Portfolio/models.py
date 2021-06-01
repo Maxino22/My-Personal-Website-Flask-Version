@@ -30,6 +30,7 @@ class User(db.Model, UserMixin):
     profile_pic = db.Column(db.String(100), default='avatar.png')
     password = db.Column(db.String(255))
     bio = db.Column(db.Text)
+    url_to = db.Column(db.String(100))
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime)
 

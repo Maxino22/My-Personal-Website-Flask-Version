@@ -188,6 +188,7 @@ def profile(current_user_id):
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
         current_user.bio = form.bio.data
+        current_user.url_to = form.url_to.data
         db.session.commit()
         flash('user updated', 'success')
         return redirect(url_for('author.profile', current_user_id=current_user.id))
@@ -196,6 +197,7 @@ def profile(current_user_id):
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.bio.data = current_user.bio
+        form.url_to.data = current_user.url_to
 
     return render_template('admin/profile.html', admin=True, form=form)
 
