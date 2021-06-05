@@ -1,9 +1,6 @@
 import os
 from datetime import timedelta
-import json
 
-with open('/etc/config.json') as config_file:
-    config = json.load((config_file))
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/images')
@@ -12,7 +9,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/images')
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'mysql://max:password@localhost/portfolio'
-    SECRET_KEY = config.get('SECRET_KEY')
+    SECRET_KEY = 'mintjtnrtjnbjt'
     SECURITY_REGISTERABLE = True
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
     SECURITY_SEND_REGISTER_EMAIL = True
@@ -43,7 +40,7 @@ class Config:
 
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_USERNAME = 'ajaybullec@gmail.com'
-    MAIL_PASSWORD = config.get('MAIL_PASSWORD')
+    MAIL_PASSWORD = 'tlulkqxzyedrkvus'
     MAIL_DEFAULT_SENDER = 'ajaybullex@gmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
@@ -54,7 +51,7 @@ class ConfigRemote:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:////' + \
         os.path.join(BASE_DIR, 'db.sqlite')
-    SECRET_KEY = config.get('SECRET_KEY')
+    SECRET_KEY = 'mintjtnrtjnbjt'
     SECURITY_REGISTERABLE = True
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
     SECURITY_SEND_REGISTER_EMAIL = True
@@ -90,7 +87,7 @@ class ConfigRemote:
     # mail
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_USERNAME = 'ajaybullec@gmail.com'
-    MAIL_PASSWORD = config.get('MAIL_PASSWORD')
+    MAIL_PASSWORD = 'tlulkqxzyedrkvus'
     MAIL_DEFAULT_SENDER = 'ajaybullexgmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
