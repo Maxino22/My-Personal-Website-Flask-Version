@@ -76,7 +76,7 @@ class ConfigRemote:
     PERMANENT_SESSION_LIFETIME = timedelta(
         minutes=10)
 
-    DEBUG = False
+    DEBUG = True
 
     # flask ckeditor
     CKEDITOR_HEIGHT = 500

@@ -84,10 +84,10 @@
             <!-- AddToAny BEGIN -->
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style d-flex justify-content-center mb-3">
               <p class="mr-2">Share this article</p>
-              <a class="a2a_button_twitter"  href="blog/{{post.id}}/{{post.slug}}" ></a>
-              <a class="a2a_button_facebook" href="blog/{{post.id}}/{{post.slug}}" ></a>
-              <a class="a2a_button_linkedin" href="blog/{{post.id}}/{{post.slug}}" ></a>
-              <a class="a2a_button_whatsapp" href="blog/{{post.id}}/{{post.slug}}"></a>
+              <a class="a2a_button_twitter"  href="{{url_for('main.post', slug=post.slug)}}" ></a>
+              <a class="a2a_button_facebook" href="{{url_for('main.post', slug=post.slug)}}" ></a>
+              <a class="a2a_button_linkedin" href="{{url_for('main.post', slug=post.slug)}}" ></a>
+              <a class="a2a_button_whatsapp" href="{{url_for('main.post', slug=post.slug)}}"></a>
               </div>
             
 
@@ -114,7 +114,7 @@
         <div id="disqus_thread"></div>
         <script>
           var post_id = '{{post.id}}';
-          var post_link = "https://maxwellmn.herokuapp.com/blog/{{post.slug}}";
+          var post_link = "{{url_for('main.post', slug=post.slug)}}";
           console.log(post_link)
         </script>
 

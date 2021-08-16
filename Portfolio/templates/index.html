@@ -2,11 +2,11 @@
 {% block metas %}
       <!-- META TAGS -->
       <meta name="description" content="{{user.bio}}">
-      <meta name="keywords" content="{{user.bio}}">
+      <meta name="keywords" content="Maxwell Muhanda, Web Dev">
       
       <!-- Open Graph -->
       <meta name="twitter:card" content="summary" />
-      <meta property="og:title" content="{{user.first_name}} {{user.last_name}}" >
+      <meta property="og:title" content="{{user.first_name}} {{user.last_name}} Personal" >
       <meta property="og:image" content="{{resized_img_src(user.profile_pic, width=1200, height=630, mode='fit', quality=95)}}" >
       <meta property="og:description" content="{{user.bio}}" >
       <meta property="og:type" content="website" >
@@ -19,15 +19,16 @@
       <meta name="robots" content="all max-image-preview:standard,max-snippet:20 ">
 
 {% endblock  %}
-{% block title %}
-  Maxwell Muhanda
-{% endblock  %}
+  {% block title %}
+  Maxwell Muhanda - Personal Website
+{% endblock  %} 
+
 {% block header %}
  <header id="main-header">
   <div class="row no-gutters">
     
     <div class="col-lg-4 col-md-5">
-      <img src="{{url_for('static', filename='profile_pics/' + user.profile_pic) }}">
+      <img src="{{url_for('static', filename='profile_pics/' + user.profile_pic) }}" alt="Maxwell Muhanda">
     </div>
     <div class="col-lg-8 col-md-7">
           <div class="d-flex flex-column">

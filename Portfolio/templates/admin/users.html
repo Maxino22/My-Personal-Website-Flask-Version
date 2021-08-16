@@ -42,7 +42,6 @@
                   <th>User Id</th>
                   <th>Name</th>
                   <th>Surname</th>
-                  <th>Email</th>
                   <th></th>
                 </tr>
               </thead>
@@ -52,7 +51,6 @@
                   <td scope="row">{{user.id}}</td>
                   <td>{{user.first_name}}</td>
                   <td>{{user.last_name}}</td>
-                  <td>{{user.email}}</td>
                   {% if current_user.id ==1 %}
                   <td><button class="btn-link btn-outline-danger text-danger ml-2" data-toggle="modal" data-target="#my">
                     <i class="fa fa-trash fa-2x "></i>
