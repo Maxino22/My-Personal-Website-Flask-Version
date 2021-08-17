@@ -1,20 +1,23 @@
 import os
 from datetime import timedelta
-
+import json
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+with open("/etc/config.json") as config_file:
+    config = json.load(config_file)
 
 
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'mysql://max:password@localhost/portfolio'
-    SECRET_KEY = 'mintjtnrtjnbjt'
+    SECRET_KEY = config.get('SECRET_KEY')
     SECURITY_REGISTERABLE = True
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
     SECURITY_SEND_REGISTER_EMAIL = True
     SECURITY_SEND_EMAIL = True
-    SECURITY_EMAIL_SENDER = 'ajaybullec@gmail.com'
+    SECURITY_EMAIL_SENDER = config.get('MAIL_USERNAME')
     SECURITY_CONFIRMABLE = True
     SECURITY_RECOVERABLE = True
     SECURITY_CHANGEABLE = True
@@ -39,8 +42,8 @@ class Config:
     CKEDITOR_CODE_THEME = 'atelier-dune.dark'
 
     MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_USERNAME = 'ajaybullec@gmail.com'
-    MAIL_PASSWORD = 'tlulkqxzyedrkvus'
+    MAIL_USERNAME = config.get('MAIL_USERNAME')
+    MAIL_PASSWORD = config.get('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = 'ajaybullex@gmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
@@ -48,15 +51,16 @@ class Config:
 
 
 class ConfigRemote:
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:////' + \
         os.path.join(BASE_DIR, 'db.sqlite')
-    SECRET_KEY = 'mintjtnrtjnbjt'
+    SECRET_KEY = config.get('SECRET_KEY')
     SECURITY_REGISTERABLE = True
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
     SECURITY_SEND_REGISTER_EMAIL = True
     SECURITY_SEND_EMAIL = True
-    SECURITY_EMAIL_SENDER = 'ajaybullec@gmail.com'
+    SECURITY_EMAIL_SENDER = config.get('MAIL_USERNAME')
     SECURITY_CONFIRMABLE = True
     SECURITY_RECOVERABLE = True
     SECURITY_CHANGEABLE = True
@@ -86,8 +90,8 @@ class ConfigRemote:
 
     # mail
     MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_USERNAME = 'ajaybullec@gmail.com'
-    MAIL_PASSWORD = 'tlulkqxzyedrkvus'
+    MAIL_USERNAME = config.get('MAIL_USERNAME')
+    MAIL_PASSWORD = config.get('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = 'ajaybullexgmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
