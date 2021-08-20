@@ -56,7 +56,7 @@ class ConfigRemote:
     SQLALCHEMY_DATABASE_URI = 'sqlite:////' + \
         os.path.join(BASE_DIR, 'db.sqlite')
     SECRET_KEY = config.get('SECRET_KEY')
-    SECURITY_REGISTERABLE = True
+    SECURITY_REGISTERABLE = False
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
     SECURITY_SEND_REGISTER_EMAIL = True
     SECURITY_SEND_EMAIL = True
@@ -87,7 +87,8 @@ class ConfigRemote:
     CKEDITOR_WIDTH = 900
     CKEDITOR_ENABLE_CODESNIPPET = True
     CKEDITOR_CODE_THEME = 'atelier-dune.dark'
-
+    #flask discussion
+    DISCUSSION_DISQUS_SHORTNAME = "maxmuhanda"
     # mail
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_USERNAME = config.get('MAIL_USERNAME')

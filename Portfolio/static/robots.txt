@@ -1,0 +1,6 @@
+user-agent: *
+Sitemap: https://www.maxino.xyz/sitemap.xml
+Disallow: /css/
+Disallow: /js/
+Disallow: /admin/
+

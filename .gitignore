@@ -3,3 +3,6 @@ migrations
 __pycache__
 .vscode
 *.sqlite
+port_pics
+images
+
