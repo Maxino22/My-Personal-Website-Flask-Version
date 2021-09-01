@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 import os
-from flask_sitemap import Sitemap
 from flask_mail import Mail
 from flask_images import Images
 from flask_discussion import  Discussion
@@ -28,7 +27,6 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 images = Images(app)
 mail = Mail(app)
-ext = Sitemap(app)
 discussion = Discussion(app)
 
 # db error
@@ -42,6 +40,11 @@ def shutdown_session(exception=None):
 @app.route('/robots.txt')
 def static_root():
     return send_from_directory('static', 'robots.txt')
+
+#sitemap
+@app.route('/sitemap.xml')
+def site_map():
+    return send_from_directory('static', 'sitemap.xml')
 
 # blueprint views
 from Portfolio.main.routes import main
