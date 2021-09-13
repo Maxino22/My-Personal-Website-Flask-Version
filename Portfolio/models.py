@@ -48,10 +48,10 @@ class Blog(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     title = db.Column(db.Text(), nullable=False)
     slug = db.Column(db.String(180), nullable=False)
-    picture = db.Column(db.String(100))
+    picture = db.Column(db.String(100), nullable=True)
     description = db.Column(db.String(200))
-    keywords = db.Column(db.String(100))
-    img_alt = db.Column(db.String(100))
+    keywords = db.Column(db.String(100), nullable=True)
+    img_alt = db.Column(db.String(100), nullable=True)
 
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     text = db.Column(db.Text, nullable=False)

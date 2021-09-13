@@ -88,7 +88,7 @@ def update_post(blog_id):
         blog.user_id = current_user.id
         blog.description = form.description.data
         blog.keywords = form.keywords.data
-        blog.img_alt = form.img_alt
+        blog.img_alt = form.img_alt.data
         db.session.commit()
         flash("Post has been updated", 'success')
         return redirect(url_for('author.posts', blog_id=blog.id))
