@@ -68,7 +68,7 @@
               <li class="nav-item"><a href="{{url_for('main.category', slug=cat.slug)}}" class="nav-link">{{cat.name}}</a></li>
               {% endfor %}
             <li class="nav-item">
-              <a href="{{url_for('main.contact')}}" class="nav-link">Contact</a>
+              <a href="{{url_for('main.index')}}" class="nav-link">Contact</a>
             </li>
           </ul>
         </div>
@@ -86,7 +86,7 @@
           <nav class="bg-body mt-3"  aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a class="text-dark" href="{{url_for('main.index')}}">Home</a></li>
-              <li class="breadcrumb-item"> <a class="text-dark" href="{{url_for('main.blog')}}">Blog</a> </li>
+              <li class="breadcrumb-item"> <a class="text-dark" href="{{url_for('main.index')}}">Blog</a> </li>
               <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
             </ol>
           </nav>
@@ -182,5 +182,6 @@
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/my.js') }}"></script>
   </body>
 </html>

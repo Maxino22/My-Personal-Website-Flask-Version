@@ -41,7 +41,7 @@
               <li class="nav-item"><a href="{{url_for('main.category', slug=cat.slug)}}" class="nav-link">{{cat.name}}</a></li>
               {% endfor %}
             <li class="nav-item">
-              <a href="{{url_for('main.contact')}}" class="nav-link">Contact</a>
+              <a href="{{url_for('main.index')}}" class="nav-link">Contact</a>
             </li>
           </ul>
         </div>
@@ -122,5 +122,6 @@
   <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/my.js') }}"></script>
   </body>
 </html>
