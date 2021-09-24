@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+    
+    <title>{{service.title}}</title>
+   
+    <!-- Meta robots -->
+    <meta name="robots" content="all max-image-preview:standard,max-snippet:20 ">
+                 <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-205112639-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-205112639-1');
+</script>
+
+  </head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-3">
+    <div class="container">
+     <a href="{{url_for('main.index')}}" class="navbar-brand">Maxino</a>
+     <button class="navbar-toggler" data-toggle="collapse" data-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ml-auto">
+          {% for service in services %}
+          <li class="nav-item"><a href="{{url_for('main.service', slug=service.slug)}}" class="nav-link">{{service.title}}</a></li>
+          {% endfor %}
+        
+      </ul>
+    </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="text-dark">{{service.title}}</h2>
+           <hr>
+           <p class="lead">{{service.description}}</p>
+           </b>
+          
+      </div>
+      <div class="col-md-6">
+        <div class="title-box-2">
+          <h5 class="title-left">
+            Send Me a Message
+          </h5>
+        </div>
+        <div>
+          <form  method="POST" role="form" class="php-email-form">
+            {{form.hidden_tag()}}
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                  {{form.name(class="form-control", placeholder="Name")}}
+                </div>
+              </div>
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                  {{form.email(class="form-control", placeholder="Email")}}
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  {{form.message(class="form-control", placeholder="Message", rows=5)}}
+                </div>
+              </div>
+              <div class="col-md-12 text-center">
+                <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

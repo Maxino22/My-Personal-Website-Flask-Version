@@ -1,6 +1,6 @@
 from flask import render_template, send_file, Blueprint, redirect, url_for, flash, request, send_from_directory, abort, current_app
 from Portfolio import db
-from Portfolio.models import User, Blog, Category, Contact, Portfolio
+from Portfolio.models import User, Blog, Category, Contact, Portfolio, Service
 from Portfolio.main.forms import ContactForm
 import os
 
@@ -17,6 +17,7 @@ def index():
     blogs = Blog.query.order_by(
         Blog.date.desc()).paginate(page=page, per_page=6)
     cats = Category.query.all()
+    services = Service.query.all()
 
     portfolio = Portfolio.query.all()
 
@@ -30,7 +31,7 @@ def index():
         flash('Message Has been recieved I will get Back to you', "success")
         return redirect(url_for('main.index'))
 
-    return render_template('index.html', user=user , blogs=blogs, cats=cats, portfolio=portfolio, form=form)
+    return render_template('index.html', user=user , blogs=blogs, cats=cats, portfolio=portfolio, form=form, services=services)
 
 
 @main.route('/blog/<string:slug>')
@@ -39,6 +40,17 @@ def post(slug):
     post = Blog.query.filter_by(slug=slug).first()
     cats = Category.query.all()
     return render_template('post.html', cats=cats,post=post, blogs=blogs)
+
+
+@main.route('/service/<string:slug>')
+def service(slug):
+    services = Service.query.all()
+    form = ContactForm()
+
+    service = Service.query.filter_by(slug=slug).first()
+    return render_template('service.html', service=service, form=form, services=services)
+
+
 
 
 

@@ -32,6 +32,11 @@ Admin Area
            <i class="fa fa-plus"></i> Add To Portfolio
          </a>
        </div>
+       <div class="col-md-3">
+         <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#addService">
+           <i class="fa fa-plus"></i> Add Service
+         </a>
+       </div>
          
        {% endif %}
       </div>
@@ -172,6 +177,44 @@ Admin Area
               {{form.link(class="form-control")}}
             </div>
             <small class="text-muted" > has to have http:</small>
+           <button class="btn btn-warning" type="submit" >Add</button>
+          </form>
+          
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Service Modal -->
+  <div class="modal fade" id="addService">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">Add Service</h5>
+          <button class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{url_for('author.admin')}}" method="POST" >
+            {{serve_form.hidden_tag()}}
+            <div class="form-group">
+              <label for="title">Title</label>
+              {{serve_form.title(class="form-control")}}
+            </div>
+            <div class="form-group">
+              <label for="icon">Font Awesome Icon</label>
+              {{serve_form.icon(class="form-control")}}
+            </div>
+            <div class="form-group">
+              <label for="name"> Heading</label>
+              {{serve_form.heading(class="form-control-file")}}
+            </div>
+            <div class="form-group">
+              <label for="name">Description</label>
+              {{serve_form.description(class="form-control")}}
+            </div>
            <button class="btn btn-warning" type="submit" >Add</button>
           </form>
           

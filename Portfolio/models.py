@@ -99,8 +99,24 @@ class Portfolio(db.Model):
     small = db.Column(db.String(50))
     pic = db.Column(db.String(50))
     description = db.Column(db.Text())
-    url_to = db.Column(db.String(100))
     link = db.Column(db.String(150))
+
+class Service(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(150), nullable=False)
+    slug = db.Column(db.String(150), nullable=False)
+    icon = db.Column(db.String(150), nullable=False)
+    heading = db.Column(db.Text())
+    description = db.Column(db.Text())
+
+
+    @staticmethod
+    def generate_slug(target, value, oldvalue, initiator):
+        if value and (not target.slug or value != oldvalue):
+            target.slug = slugify(value)
+
+
+db.event.listen(Service.title, 'set', Category.generate_slug, retval=False)
 
 
 # flask security

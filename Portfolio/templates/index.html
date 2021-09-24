@@ -87,13 +87,13 @@
               <button  title="home" onclick="showPanel(0)" class=" btn port-item p-3 bg-dark link">
                 <i class="fa fa-home d-block"></i> Home
               </button>
-              <button title="blog" onclick="showPanel(1)"  class=" btn port-item p-3 bg-white link">
+              <button title="blog" onclick="showPanel(1)"  class=" btn port-item p-3 bg-success link">
                 <i class="fa fa-book d-block text-dark"></i> <p class="text-dark" >Blog</p> 
               </button>
-              <button title="work" onclick="showPanel(2)" class=" btn port-item p-3 bg-danger link" >
-                <i class="fa fa-folder-open d-block"></i> Work
+              <button title="work" onclick="showPanel(2)" class=" btn port-item p-3 bg-warning link" >
+                <i class="fa fa-gamepad d-block"></i> Games
               </button>
-              <button  title="contact" onclick="showPanel(3)" class="  port-item p-3 bg-success link">
+              <button  title="contact" onclick="showPanel(3)" class="  port-item p-3 bg-danger link">
                 <i class="fa fa-envelope d-block"></i> Contact
               </button>
             </div> 
@@ -150,103 +150,79 @@
 
          </div>
        </div>
-       <div id="service">
+        <!-- services -->
+       <div id="service" class="mb-3 mt-3">
          <h4 class="display-4 font-weight-bold text-center">SERVICES</h4>
          <p class="text-center text-dark">Here are services I offer</p>
          <hr class="mb-4">
          <div class="row">
-          <div class="col-md-4">
-            <div class="service-box card card-body">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="fa fa-briefcase"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Web Design</h2>
-                <p class="s-description text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem fugiat! Quia,
-                  provident vitae! Magni
-                  tempora perferendis eum non provident.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box card card-body">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="fa fa-search"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Web Development</h2>
-                <p class="s-description text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem fugiat! Quia,
-                  provident vitae! Magni
-                  tempora perferendis eum non provident.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box card card-body">
-              <div class="service-ico ">
-                <span class="ico-circle"><i class="fa fa-search"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Web Development</h2>
-                <p class="s-description text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem fugiat! Quia,
-                  provident vitae! Magni
-                  tempora perferendis eum non provident.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box card card-body">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="fa fa-search"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Web Development</h2>
-                <p class="s-description text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem fugiat! Quia,
-                  provident vitae! Magni
-                  tempora perferendis eum non provident.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box card card-body">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="fa fa-search"></i></span>
-              </div>
-              <div class="service-content ">
-                <h2 class="s-title">Web Development</h2>
-                <p class="s-description text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem fugiat! Quia,
-                  provident vitae! Magni
-                  tempora perferendis eum non provident.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-box card card-body">
-              <div class="service-ico">
-                <span class="ico-circle"><i class="fa fa-search"></i></span>
-              </div>
-              <div class="service-content">
-                <h2 class="s-title">Web Development</h2>
-                <p class="s-description text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci eaque autem fugiat! Quia,
-                  provident vitae! Magni
-                  tempora perferendis eum non provident.
-                </p>
-              </div>
-            </div>
-          </div>
+           {% for service in services %}
+               <div  class="col-md-4">
+                 <div class="service-box card card-body">
+                   <div class="service-ico">
+    
+                    <a href="{{url_for('main.service', slug=service.slug)}}"><span class="ico-circle"><i class="{{service.icon}}"></i></span></a>
+                   </div>
+                   <div class="service-content">
+                     <h2 class="s-title"><a href="{{url_for('main.service', slug=service.slug)}}">{{service.title}}</a></h2>
+                     <p class="s-description text-center">
+                      {{service.heading}}
+                     </p>
+                   </div>
+                 </div>
+               </div>
+
+           {% endfor %}
+          
+    
            </div>
          </div>
+
+         <!-- portfolio -->
+         <section id="work" class="portfolio-mf sect-pt4 route">
+         <div class="row ">
+          <div class="col-sm-12">
+            <div class="title-box text-center">
+              <h3 class="title-a">
+                Portfolio
+              </h3>
+              <p class="subtitle-a">
+                Take a Look at Some of my work
+              </p>
+              <div class="line-mf"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          {% for port in portfolio %}
+          <div class="col-md-4">
+              <div class="work-box">
+                <a href="{{port.link}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                  <div class="work-img">
+                    <img src="{{url_for('static', filename='port_pics/' + port.pic, mode='crop') }}" alt="" class="img-fluid">
+                  </div>
+                </a>
+                <div class="work-content">
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <h2 class="w-title">{{port.title}}</h2>
+                      <div class="w-more">
+                        <span class="w-ctegory">{{port.small}}</span> / <span class="w-date"><a href="{{port.link}}">Visit</a></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="w-like">
+                        <a href="{{port.link}}"> <span class="fa fa-plus-circle"></span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+            {% endfor %}
+        </div>
+         </section>
        </div>
 
      </div>
@@ -263,7 +239,7 @@
                 Blog
               </h3>
               <p class="subtitle-a">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Read Blog
               </p>
               <div class="line-mf"></div>
             </div>
@@ -273,7 +249,7 @@
 
      {% for blog in blogs.items %}
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 ml-4">
           <div class="card card-blog">
             <div class="card-img">
               <a href="{{url_for('main.post', slug=blog.slug)}}"><img src="{{resized_img_src(blog.picture, width=600, height=335, mode='fit', quality=95)}}" alt="{{blog.img_alt}}" class="img-fluid"></a>
@@ -297,7 +273,7 @@
                 </a>
               </div>
               <div class="post-date">
-                <span class="bi bi-clock"></span> {{blog.date.strftime("%B %d, %Y ")}}
+                <span class="fa fa-clock-o"></span> {{blog.date.strftime("%B %d, %Y ")}}
               </div>
             </div>
           </div>
@@ -323,51 +299,11 @@
      
      </div>
      
-     <!-- WORK -->
+     <!-- Games-->
      
      <div class="tabPanel" id="work">
 
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="title-box text-center">
-            <h3 class="title-a">
-              Portfolio
-            </h3>
-            <p class="subtitle-a">
-              Take a Look at Some of my work
-            </p>
-            <div class="line-mf"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        {% for port in portfolio %}
-        <div class="col-md-4">
-          <div class="work-box">
-            <a href="{{port.link}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
-              <div class="work-img">
-                <img src="{{url_for('static', filename='port_pics/' + port.pic, mode='crop') }}" alt="" class="img-fluid">
-              </div>
-            </a>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h2 class="w-title">{{port.title}}</h2>
-                  <div class="w-more">
-                    <span class="w-ctegory">{{port.small}}</span> / <span class="w-date"><a href="{{port.link}}">Visit</a></span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="w-like">
-                    <a href="{{port.link}}"> <span class="bi bi-plus-circle"></span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
+     
       </div>
      
      
@@ -395,7 +331,7 @@
                 <div class="col-md-6">
                   <div class="title-box-2">
                     <h5 class="title-left">
-                      Send Message Us
+                      Send Me a Message
                     </h5>
                   </div>
                   <div>
@@ -500,7 +436,7 @@
       <div class="row">
         <div class="col-md-6">
           <a href="{{url_for('main.index')}}">
-            <i class="fa fa-home fa-2x"></i>
+            <i class="fa fa-home fa-2x text-white"></i>
           </a>
         </div>
         <div class="col-md-6">

@@ -53,27 +53,43 @@
 <div class="container">
   <div class="category-main-grid">
     <div>
-      <div class="category-title">
+      <div class="category-title mb-3">
         <h1>{{category.name}}</h1>
       </div>
       
-      <div class="category-posts">
+      <div class="category-posts mt-3">
         {% for blog in blogs.items %}
           {% if blog.category_id == category.id %}
-            <div class="post-card">
-              <div class="post-image">
-                <img src="{{ blog.picture }}" alt="{{blog.img_alt}}">
-              </div>
-              <div class="post-content">
-                <h4 class="card-title"><a title="{{blog.title}}" href="{{url_for('main.post', slug=blog.slug)}}" class="text-dark">{{blog.title}}</a></h4>
-                <small class="text-muted"> Written By {{blog.user.first_name}} {{blog.user.last_name}} on {{blog.date.strftime("%B %d, %Y ")}}</small>
-                <hr>
-                <p class="card-text">{{blog.description}}<a href="{{url_for('main.post', slug=blog.slug)}}">Read More</a> </p>
-                <div class="post-footer text-muted">
-                  <p><i class="fa fa-folder"></i>  {{category.name}}</p>
+          <div class="card card-blog">
+            <div class="card-img">
+              <a href="{{url_for('main.post', slug=blog.slug)}}"><img src="{{resized_img_src(blog.picture, width=600, height=335, mode='fit', quality=95)}}" alt="{{blog.img_alt}}" class="img-fluid"></a>
+            </div>
+            <div class="card-body">
+              <div class="card-category-box">
+                <div class="card-category">
+                  <h6 class="category">{{blog.category.name}}</h6>
                 </div>
               </div>
+              <h3 class="card-title"><a  title="{{blog.title}}" href="{{url_for('main.post', slug=blog.slug)}}">{{blog.title}}</a></h3>
+              <p class="card-description">
+                {{blog.description}}
+              </p>
             </div>
+            <div class="card-footer">
+              <div class="post-author">
+                <a href="{{blog.user.url_to}}">
+                  <img src="{{url_for('static', filename='profile_pics/' + blog.user.profile_pic) }}"  alt="" class="avatar rounded-circle">
+                  <span class="author">{{blog.user.first_name}} {{blog.user.last_name}}</span>
+                </a>
+              </div>
+              <div class="post-date">
+                <span class="fa fa-clock-o"></span> {{blog.date.strftime("%B %d, %Y ")}}
+              </div>
+            </div>
+          </div>
+      
+            {% else %}
+            <h1 class="text-muted text-center display-4"> NO POST YET</h1>
           {% endif %}
         {% endfor %}
       </div>

@@ -43,6 +43,13 @@ class PortfolioForm(FlaskForm):
     description = TextAreaField()
    
     link = StringField()
+
+
+class ServiceForm(FlaskForm):
+    title = StringField()
+    icon = StringField()
+    heading = TextAreaField()
+    description = TextAreaField()
   
 class CategoryForm(FlaskForm):
     name = StringField(validators=[Length(max=100)])

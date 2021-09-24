@@ -1,8 +1,8 @@
 from flask import render_template, send_file, Blueprint, redirect, url_for, flash, request, send_from_directory, abort, current_app, session
 from Portfolio import db, photos, app, mail
-from Portfolio.models import User, Blog, Category, Contact, Portfolio
+from Portfolio.models import User, Blog, Category, Contact, Portfolio, Service
 from flask_security import login_required, logout_user, current_user
-from Portfolio.admin.forms import ArticleForm, CategoryForm, UpdateForm, Reply, PortfolioForm
+from Portfolio.admin.forms import ArticleForm, CategoryForm, UpdateForm, Reply, PortfolioForm, ServiceForm
 from Portfolio.picture_handler import add_profile_pic, add_port_pic
 from flask_mail import Message
 import os
@@ -21,6 +21,17 @@ def admin():
     categories = Category.query.all()
     users = User.query.all()
 
+    serve_form = ServiceForm()
+
+    if serve_form.validate_on_submit():
+        new_service = Service(title=serve_form.title.data, icon=serve_form.icon.data, heading=serve_form.heading.data, description=serve_form.description.data)
+
+        db.session.add(new_service)
+        db.session.commit()
+        flash("Service Added", 'success')
+        return redirect(url_for('author.admin'))
+    
+    # Portfolio form
     form = PortfolioForm()
 
     if form.validate_on_submit():
@@ -29,13 +40,16 @@ def admin():
 
         new_port = Portfolio(title=form.title.data, small=form.small.data,
                              pic=pic, description=form.description.data, link=form.link.data)
-        print(form.title.data)
+      
         db.session.add(new_port)
         db.session.commit()
         flash("Portfolio Added", 'success')
         return redirect(url_for('author.admin'))
+    
+    
 
-    return render_template('admin/index.html', admin=True, form=form, users=users, categories=categories, blogs=blogs, messages=messages)
+
+    return render_template('admin/index.html', admin=True, form=form, users=users, categories=categories, blogs=blogs, serve_form=serve_form, messages=messages)
 
 
 @author.route('/admin/add', methods=['GET', 'POST'])

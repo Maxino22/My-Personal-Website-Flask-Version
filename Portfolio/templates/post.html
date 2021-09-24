@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <!-- ckeditor -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='ckeditor/plugins/codesnippet/lib/highlight/styles/atelier-dune.dark.css') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
 
@@ -76,102 +79,118 @@
       </nav>
 
 <!-- Home Section -->
- 
-<section>
+<main id="main">
+
+  <!-- ======= Blog Single Section ======= -->
+  <section class="blog-wrapper sect-pt4" id="blog">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8">   
-        <article class="main card border-light">
+        <div class="col-md-8">
+          <div class="post-box">
+            <div class="post-thumb">
+              <img src="{{resized_img_src(post.picture, width=960, height=960, mode='crop', quality=95)}}" class="img-fluid" alt="{{post.img_alt}}">
+            </div>
+            <div class="post-meta">
+              <h1 class="article-title">{{post.title}}</h1>
+              <ul>
+                <li>
+                  <span class="fa fa-user"></span>
+                  <a href="{{post.user.url_to}}">{{post.user.first_name}} {{post.user.last_name}}</a>
+                </li>
+                <li>
+                  <span class="fa fa-tag"></span>
+                  <a href="{{url_for('main.category', slug=post.category.slug)}}">{{post.category.name}}</a>
+                </li>
+                <li>
+                  <span class="fa fa-commenting-o"></span>
+                  <a href="http://maxino.xyz{{url_for('main.post', slug=post.slug)}}" >{{ disqus.render_comment_count() }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="article-content">
+              <p>{{post.text | safe}}</p>
+           
+              <!-- AddToAny BEGIN -->
+              <div class="a2a_kit a2a_kit_size_32 a2a_default_style d-flex justify-content-center">
+                <p class="mr-2">Share this article</p>
+                <a class="a2a_button_twitter"  href="{{url_for('main.post', slug=post.slug)}}" ></a>
+                <a class="a2a_button_facebook" href="{{url_for('main.post', slug=post.slug)}}" ></a>
+                <a class="a2a_button_linkedin" href="{{url_for('main.post', slug=post.slug)}}" ></a>
+                <a class="a2a_button_whatsapp" href="{{url_for('main.post', slug=post.slug)}}"></a>
+                </div>
+              
+            </div>
 
-          <nav class="bg-body mt-3"  aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a class="text-dark" href="{{url_for('main.index')}}">Home</a></li>
-              <li class="breadcrumb-item"> <a class="text-dark" href="{{url_for('main.index')}}">Blog</a> </li>
-              <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
-            </ol>
-          </nav>
-          <div class="blog-header">
-            <h1 class="card-title display-5 text-center">{{post.title}}</h1>
-            <p class="text-center text-muted">Posted on {{post.date.strftime('%B %d, %Y ')}} by {{post.user.first_name}} {{post.user.last_name}}</p>
-            <div>
-              <img class="card-img" src="{{resized_img_src(post.picture, width=960, height=960, mode='crop', quality=95)}}" alt="{{post.img_alt}}" />
+          </div>
+          <div class="box-comments">
+            {{ disqus.render_comments(identifier=post.id, url="https://maxino.xyz/blog/"+post.slug , title=post.title) }}
+          </div>
+          <div class="form-comments">
+            <div class="card-body d-flex flex-row card border-light about">
+              <img class="rounded-circle" style="width: 5rem;" src="{{url_for('static', filename='profile_pics/' + post.user.profile_pic) }}" alt="User Image" />
+                    <div class="blog-footer-content">
+                      <a class="text-dark" target="_blank" href="{{post.user.url_to}}">
+                      {% if post.user.id ==1 %}
+                    <h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3>
+                    {%else %}
+                    <h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3>
+                    {% endif %} 
+                  </a>  
+                 
+                      <p>
+                        {{post.user.bio}}
+                      </p>            
+                </div>
+              </div> 
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- Ads -->
+          <div class="widget-sidebar sidebar-search">
+            <div class="sidebar-content">
+              
             </div>
           </div>
-          <div class="card-body card-text ">
-            <p>{{post.text | safe}}</p>
-            
+          <div class="widget-sidebar">
+            <h5 class="sidebar-title">Recent Post</h5>
+            <div class="sidebar-content">
+              {% for blog in blogs %}
+              <ul class="list-sidebar">
+                <li> <a class="card-text text-dark" href="{{url_for('main.post', slug=blog.slug)}}"
+                  >{{blog.title}}</a></li>
+              </ul>
+              {%endfor%}
+            </div>
           </div>
+          <div class="widget-sidebar">
+           <!-- ads -->
+            <div class="sidebar-content">
           
-            <!-- AddToAny BEGIN -->
-            <div class="a2a_kit a2a_kit_size_32 a2a_default_style d-flex justify-content-center mb-3">
-              <p class="mr-2">Share this article</p>
-              <a class="a2a_button_twitter"  href="{{url_for('main.post', slug=post.slug)}}" ></a>
-              <a class="a2a_button_facebook" href="{{url_for('main.post', slug=post.slug)}}" ></a>
-              <a class="a2a_button_linkedin" href="{{url_for('main.post', slug=post.slug)}}" ></a>
-              <a class="a2a_button_whatsapp" href="{{url_for('main.post', slug=post.slug)}}"></a>
-              </div>
-            
-
-<!-- AddToAny END -->
-          
-        </article>
-
-            <div class="card-body d-flex flex-row card border-light about">
-        <img class="rounded-circle" style="width: 5rem;" src="{{url_for('static', filename='profile_pics/' + post.user.profile_pic) }}" alt="User Image" />
-              <div class="blog-footer-content">
-                <a class="text-dark" target="_blank" href="{{post.user.url_to}}">
-                {% if post.user.id ==1 %}
-              <h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3>
-              {%else %}
-              <h3 class="about-title">{{post.user.first_name}} {{post.user.last_name}}</h3>
-              {% endif %} 
-            </a>  
-           
-                <p>
-                  {{post.user.bio}}
-                </p>            
+            </div>
+          </div>
+          <div class="widget-sidebar widget-tags">
+            <h5 class="sidebar-title">Tags</h5>
+            <div class="sidebar-content">
+              <ul>
+              {% for cat in cats %}
+              <li><a href="{{url_for('main.category', slug=cat.slug)}}">{{cat.name}}</a></li>
+              {% endfor %}
+            </ul>
+                
+            </div>
           </div>
         </div>
-   
+      </div>
+    </div>
+  </section><!-- End Blog Single Section -->
 
-		
-   		
-       		 {{ disqus.render_comments(identifier=post.id, url="https://maxino.xyz/blog/"+post.slug , title=post.title) }}
-	  
-	
-            
-   
+</main>
  
-      </div>
-        <!-- Side Bar -->
-
-        <div class="col-lg-4">
-          <div class="card pad mb-5"></div>
-          <div class="card border-light">
-            <p class="card-title lead">Popular Posts</p>
-            {% for blog in blogs %}
-            <div class="card-body d-flex">
-              <img class="cory rounded" src="{{resized_img_src(blog.picture, width=960, height=960, mode='crop', quality=95)}}" alt="PPs" />
-              <div class="d-flex flex-column justify-content-between">
-                <p>
-                  <a class="card-text text-dark" href="{{url_for('main.post', slug=blog.slug)}}"
-                  >{{blog.title}}</a
-                  >
-                </p>
-                <small class="text-muted">{{ blog.date.strftime('%Y-%m-%d') }}</small>
-              </div>
-            </div>    
-            {% endfor %}
-          </div>
-          <div class="card pad mt-5"></div>
-        </div>
-      </div>
-  </section>
   <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
     <div class="conatiner">
       <div class="row">
         <div class="col">
-          <p class="lead text-center">Copyright &copy; 2021 Maxino</p>
+          <p class="lead text-center ml-auto">Copyright &copy; <span class="year"></span> Maxino</p>
         </div>
       </div>
     </div>
@@ -183,5 +202,9 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/my.js') }}"></script>
+    <!-- ckeditor -->
+    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ url_for('static', filename='ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
