@@ -8,21 +8,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon"> 
+    <link rel="canonical" href="{{url_for('main.index')}}">
     
     {% block metas %}
     <!-- META TAGS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="{{user.bio}}">
+    <meta name="description" content="Maxwell is a full-stack web developer and a digital Marketing consultant based in Nairobi Kenya. He specializes in buildong REST API, SEO and Digital Marketing">
     <meta name="keywords" content="Maxwell Muhanda, Web Dev">
     
     <!-- Open Graph -->
     <meta name="twitter:card" content="summary" />
-    <meta property="og:title" content="{{user.first_name}} {{user.last_name}} Personal" >
+    <meta property="og:title" content="Maxwell Muhanda -FullStack Developer & Digital Marketing Consolutant" >
     <meta property="og:image" content="{{resized_img_src(user.profile_pic, width=1200, height=630, mode='fit', quality=95)}}" >
-    <meta property="og:description" content="{{user.bio}}" >
+    <meta property="og:description" content="Maxwell Muhanda is a full-stack web developer and a digital Marketing consultant based in Nairobi Kenya. He specializes in buildong REST API, SEO and Digital Marketing" >
     <meta property="og:type" content="website" >
+    <meta property="og:locale" content="en_US"> 
     <meta property="og:url" content="{{url_for('main.index')}}" >
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="300" />
@@ -30,7 +32,7 @@
     <meta name="msvalidate.01" content="66AB8D13F5B993A24487E722160EF14A" />
     
       <!-- Meta robots -->
-      <meta name="robots" content="all max-image-preview:standard,max-snippet:20 ">
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
       
       {% endblock  %}
 
@@ -55,7 +57,7 @@
     gtag('config', 'UA-205112639-1');
   </script>
   
-      <title>Maxwell Muhanda -FullStack Developer</title>
+      <title>Maxwell Muhanda -FullStack Developer & Digital Marketing Consolutant</title>
     </head>
 
   <body class="container">
@@ -109,47 +111,61 @@
      
      <div class="tabPanel " id="home">
 
-     <div class="card card-body bg-white text-dark mt-5 mb-3 py-5">
-       <div class="row">
-         <div class="col-md-6">
-          <h3>My Skills</h3>
-          <p>The following are skills i offer </p>
-          <hr>
-          <h4>HTML/CSS</h4>
-          <div class="progress mb-3">
-          <div class="progress-bar bg-success" style="width:100%"></div>
-          </div>
-          <h4>Python</h4>
-          <div class="progress mb-3">
-          <div class="progress-bar bg-success" style="width:100%"></div>
-          </div>
-          <h4>Database Design</h4>
-          <div class="progress mb-3">
-          <div class="progress-bar bg-success" style="width:100%"></div>
-          </div>
-          <h4>Data Analysis</h4>
-          <div class="progress mb-3">
-          <div class="progress-bar bg-success" style="width:80%"></div>
-          </div>
-          <h4>Digital Marketing</h4>
-          <div class="progress mb-3">
-          <div class="progress-bar bg-success" style="width:70%"></div>
-          </div>
-           
-         </div>
-         <div class="col-md-6">
-           <h2 class="text-dark">About Me</h2>
-           <hr>
-           <p class="lead">Welcome to my Personal website, My name is Maxwell, i like to design, develop and deploy websites</p>
-           <p class="lead">I specially enjoy working with small or local businesses, helping them launch and maintain a digital infrastructure.</p>
-           <p>Contact me and tell me what you need</p>
-           <b>
-           <a href="mailto:{{user.email}}">info@maxmuhanda.com</a>
-           </b>
-           </div>
+      <div class="row mt-4">
+        <div class="col-sm-12">
+          <div class="box-shadow-full">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-sm-6 col-md-5">
+                    <div class="about-img ml-3 mt-3">
+                      <img src="{{url_for('static', filename='profile_pics/' + user.profile_pic) }}" class="img-fluid rounded b-shadow-a" alt="Maxwell Muhanda">
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-7 mt-3 ">
+                    <div class="about-info">
+                      <p><span class="title-s">Name: </span> <span>Maxwell Muhanda</span></p>
+                      <p><span class="title-s">Profile: </span> <span>full stack developer</span></p>
+                      <p><span class="title-s">Email: </span> <span><a href="mailto:{{user.email}}">ajaybullec@gmail.com</a></span></p>
+                      <a href="mailto:{{user.email}}">info@maxmuhanda.com</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="skill-mf mt-3">
+                      <h5 class="title-left ml-3" style="display: block;">
+                        My Tech Stacks
+                      </h5>
+                  <img class="image-fluid rounded b-shadow-a ml-3" title="python" src="{{url_for('static', filename='img/python.png')}}" alt="">
+                  <img class="image-fluid rounded b-shadow-a" title="Javascript" src="{{url_for('static', filename='img/js.png')}}" alt="">
+                  <img class="image-fluid rounded b-shadow-a" title="SQL" src="{{url_for('static', filename='img/sql.png')}}" alt="">
+                  <img class="image-fluid rounded b-shadow-a" title="django" src="{{url_for('static', filename='img/django.png')}}" alt="">
+                  <img class="image-fluid rounded b-shadow-a" title="flask" src="{{url_for('static', filename='img/flask.png')}}" alt="">   
+                 
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="about-me pt-4 pt-md-0">
+                    <div class="title-box-2">
+                    </div>
+                    <p class="lead">
+                      Hi, I'm Maxwell Muhanda, a Full-Stack Web Develper and Digital Marketing specialist based in Nairobi Kenya. I'm passionate about helping businesses small to large increase their revenues with proven digital marketing strategies.
+                    </p>
+                    <p class="lead">
+                     I also specialize in creating software that follows all modern day best practice, fast, reliable and secure to help your online business reach its potential. 
+                    </p>
+                    <p class="lead">
+                    Looking foward to  help you pivot from thinking digital to being digital at the very core.
+                    </p>
 
-         </div>
-       </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- End of Row -->
+            </div>
+          </div>
+        </div>
+
         <!-- services -->
        <div id="service" class="mb-3 mt-3">
          <h4 class="display-4 font-weight-bold text-center">SERVICES</h4>
@@ -158,7 +174,7 @@
          <div class="row">
            {% for service in services %}
                <div  class="col-md-4">
-                 <div class="service-box card card-body">
+                 <div class="service-box card card-body m-2">
                    <div class="service-ico">
     
                     <a href="{{url_for('main.service', slug=service.slug)}}"><span class="ico-circle"><i class="{{service.icon}}"></i></span></a>
@@ -196,9 +212,9 @@
         
         <div class="row">
           {% for port in portfolio %}
-          <div class="col-md-4">
-              <div class="work-box">
-                <a href="{{port.link}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
+          <div class="col-md-4 m-3">
+              <div class="work-box card card-body">
+                <a href="{{port.link}}" target="_blank" data-gallery="portfolioGallery" class="portfolio-lightbox">
                   <div class="work-img">
                     <img src="{{url_for('static', filename='port_pics/' + port.pic, mode='crop') }}" alt="" class="img-fluid">
                   </div>
@@ -213,7 +229,7 @@
                     </div>
                     <div class="col-sm-4">
                       <div class="w-like">
-                        <a href="{{port.link}}"> <span class="fa fa-plus-circle"></span></a>
+                        <a target="_blank" href="{{port.link}}"> <span class="fa fa-plus-circle"></span></a>
                       </div>
                     </div>
                   </div>
@@ -225,8 +241,9 @@
          </section>
        </div>
 
-     </div>
-     
+    <!-- End of Main -->
+
+
      <!-- Blogs-->
      
      <div class="tabPanel" id="blog">
@@ -302,7 +319,19 @@
      <!-- Games-->
      
      <div class="tabPanel" id="work">
-
+      <div class="row ">
+        <div class="col-sm-12">
+          <div class="title-box text-center">
+            <h3 class="title-a">
+              Play Games
+            </h3>
+            <p class="subtitle-a display-2 text-dark">
+              COMING SOON
+            </p>
+            <div class="line-mf"></div>
+          </div>
+        </div>
+      </div>
      
       </div>
      
@@ -401,25 +430,31 @@
       <div class="row">
         <div class="col-md-4">
           <ul>
-            <li style="list-style: none;">
+            <li>
+              <a href="{{ url_for('main.download') }}" >Download My Resume</a>
+              </li>
+            <li >
             <a href="https://www.privacypolicygenerator.info/live.php?token=bDwrLnjicqPQ5lbVfkqSD1J9HV58YipI">Privacy Policy</a>
             </li>
-            <li style="list-style: none;">
+            <li >
             <a href="{{url_for('main.index')}}">Contact Me</a>
             </li>
-            <li style="list-style: none;">
+            <li >
             <a href="{{url_for('main.index')}}">Blog</a>
             </li>
-            <li style="list-style: none;">
+            <li >
             <a href="{{url_for('main.sitemap')}}">Sitemap</a>
             </li>
           </ul>
         </div>
         <div class="col-md-4">
+          <h6 class="lead">Blogs</h6>
         <ul>
-          <li style="list-style: none;">
-            <a href="{{ url_for('main.download') }}" ><i class="fa fa-cloud"></i> Download My Resume</a>
-            </li>
+         {% for blog in blogs.items %}
+           <li > 
+             <a href="{{url_for('main.post', slug=blog.slug)}}">{{blog.title}}</a>
+           </li>
+         {% endfor %}
         </ul>
         </div>
         <div class="col-md-4">

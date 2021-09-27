@@ -42,10 +42,18 @@ def post(slug):
     return render_template('post.html', cats=cats,post=post, blogs=blogs)
 
 
-@main.route('/service/<string:slug>')
+@main.route('/service/<string:slug>', methods=['GET', 'POST'])
 def service(slug):
     services = Service.query.all()
     form = ContactForm()
+
+    if form.validate_on_submit():
+        new_message = Contact(name=form.name.data,
+                               email=form.email.data, message=form.message.data)
+        db.session.add(new_message)
+        db.session.commit()
+        flash('Message Has been recieved I will get Back to you', "success")
+        return redirect(url_for('main.index'))
 
     service = Service.query.filter_by(slug=slug).first()
     return render_template('service.html', service=service, form=form, services=services)

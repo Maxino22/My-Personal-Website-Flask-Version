@@ -78,7 +78,7 @@ class ConfigRemote:
     SECURITY_DEFAULT_REMEMBER_ME = True
     UPLOADED_PHOTOS_DEST = STATIC_ROOT
     PERMANENT_SESSION_LIFETIME = timedelta(
-        minutes=10)
+        minutes=30)
 
     DEBUG = True
 

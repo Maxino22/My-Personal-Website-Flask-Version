@@ -215,6 +215,7 @@ a:hover {
   border-radius: 1rem;
   margin-bottom: 3rem;
   text-align: center;
+  object-fit: cover;
 }
 .service-box:hover .ico-circle {
   transition: all 500ms ease;
@@ -241,9 +242,11 @@ a:hover {
   text-transform: uppercase;
   text-align: center;
   padding: 0.4rem 0;
+  object-fit: cover;
 }
 .service-box .s-description {
   color: #4e4e4e;
+  object-fit: cover;
 }
 
 
@@ -309,6 +312,49 @@ a:hover {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	transform: scale(1.05);
 	cursor: pointer;
+}
+
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+.about-mf .box-shadow-full {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.about-mf .about-img {
+  margin-bottom: 2rem;
+}
+.about-mf .about-img img {
+  margin-left: 10px;
+}
+@media (min-width: 767px) {
+  .about-mf .box-pl2 {
+    margin-top: 3rem;
+    padding-left: 0rem;
+  }
+  .about-info{
+    margin-left: 5px;
+  }
+}
+
+.skill-mf img{
+  width: 80px;
+  height: 60px;
+  padding: 10px;
+  margin-top: 15px;
+  display: inline;
+}
+
+.skill-mf img:hover{
+  cursor: pointer;
+  transform: scale(1.3);
+ 
+}
+
+@media (max-width: 576px) {
+  .about-img {
+    display: none;
+  }
 }
 
 /* Portfolio */
