@@ -53,10 +53,9 @@ class Config:
 class ConfigRemote:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////' + \
-        os.path.join(BASE_DIR, 'db.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'postgresql://dbadmin:Maxino22@localhost/portfolio'
     SECRET_KEY = config.get('SECRET_KEY')
-    SECURITY_REGISTERABLE = False
+    SECURITY_REGISTERABLE = True
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
     SECURITY_SEND_REGISTER_EMAIL = True
     SECURITY_SEND_EMAIL = True

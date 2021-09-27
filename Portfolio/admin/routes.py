@@ -22,6 +22,9 @@ def admin():
     users = User.query.all()
 
     serve_form = ServiceForm()
+    # Portfolio form
+    form = PortfolioForm()
+
 
     if serve_form.validate_on_submit():
         new_service = Service(title=serve_form.title.data, icon=serve_form.icon.data, heading=serve_form.heading.data, description=serve_form.description.data)
@@ -31,8 +34,6 @@ def admin():
         flash("Service Added", 'success')
         return redirect(url_for('author.admin'))
     
-    # Portfolio form
-    form = PortfolioForm()
 
     if form.validate_on_submit():
         first_name = str(uuid.uuid4())
