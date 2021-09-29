@@ -11,7 +11,8 @@ with open("/etc/config.json") as config_file:
 
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'mysql://max:password@localhost/portfolio'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////' + \
+        os.path.join(BASE_DIR, 'db.sqlite')
     SECRET_KEY = config.get('SECRET_KEY')
     SECURITY_REGISTERABLE = True
     SECURITY_PASSWORD_SALT = 'jnbtrbggtrnhguhtr'
@@ -39,6 +40,7 @@ class Config:
     CKEDITOR_HEIGHT = 500
     CKEDITOR_WIDTH = 900
     CKEDITOR_ENABLE_CODESNIPPET = True
+    DISCUSSION_DISQUS_SHORTNAME = "maxmuhanda"
     CKEDITOR_CODE_THEME = 'atelier-dune.dark'
 
     MAIL_SERVER = 'smtp.gmail.com'
